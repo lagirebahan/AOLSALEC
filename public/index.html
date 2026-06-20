@@ -11,7 +11,6 @@
 </head>
 <body>
 
-  <!-- ── LOGIN PAGE ─────────────────────────────────── -->
   <div id="login-page" class="login-page">
     <div class="login-card">
       <div class="login-logo">
@@ -43,7 +42,6 @@
     </div>
   </div>
 
-  <!-- ── REGISTER PAGE ──────────────────────────────── -->
   <div id="register-page" class="login-page hidden">
     <div class="login-card">
       <div class="login-logo">
@@ -80,10 +78,8 @@
     </div>
   </div>
 
-  <!-- ── MAIN APP ────────────────────────────────────── -->
   <div id="app" class="app hidden">
 
-    <!-- Top Nav -->
     <header class="topnav">
       <div class="nav-left">
         <i class="fa-solid fa-book-open nav-logo-icon"></i>
@@ -104,10 +100,8 @@
       </div>
     </header>
 
-    <!-- ── CATALOG VIEW ──────────────────────────────── -->
     <div id="view-catalog" class="view">
 
-      <!-- Add book bar (admin only) -->
       <div class="add-book-bar admin-only hidden">
         <i class="fa-solid fa-plus"></i>
         <input type="text" id="add-title" placeholder="Book title...">
@@ -116,7 +110,6 @@
         <button class="btn-add-book" id="add-book-btn">Add Book</button>
       </div>
 
-      <!-- Search bar -->
       <div class="search-bar-row">
         <div class="search-input-wrap">
           <i class="fa-solid fa-magnifying-glass"></i>
@@ -129,11 +122,9 @@
         <button class="btn-clear hidden" id="clear-search">✕ Clear</button>
       </div>
 
-      <!-- Book grid -->
       <div id="book-grid" class="book-grid"></div>
     </div>
 
-    <!-- ── USERS VIEW (admin only) ───────────────────── -->
     <div id="view-users" class="view hidden">
       <div class="add-user-bar">
         <input type="text" id="new-username" placeholder="Username">
@@ -156,7 +147,6 @@
 
   </div>
 
-  <!-- ── EDIT BOOK MODAL ──────────────────────────────── -->
   <div id="edit-modal" class="modal-overlay hidden">
     <div class="modal-box">
       <h3>Edit Book</h3>
@@ -180,7 +170,6 @@
     </div>
   </div>
 
-  <!-- ── TOAST ─────────────────────────────────────────── -->
   <div id="toast" class="toast hidden"></div>
 
   <script src="app.js"></script>

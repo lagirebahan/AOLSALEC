@@ -1,4 +1,3 @@
-/* ── Reset & Base ─────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
@@ -23,7 +22,7 @@ html, body { height: 100%; background: var(--bg); color: var(--text); font-famil
 
 .hidden { display: none !important; }
 
-/* ── Login Page ───────────────────────────────────────── */
+
 .login-page {
   min-height: 100vh;
   display: flex; align-items: center; justify-content: center;
@@ -89,10 +88,10 @@ html, body { height: 100%; background: var(--bg); color: var(--text); font-famil
 .hint-badge.admin { background: rgba(108,99,255,0.2); color: var(--accent); }
 .hint-badge.user  { background: rgba(20,184,166,0.2); color: var(--teal); }
 
-/* ── App Shell ─────────────────────────────────────────── */
+
 .app { display: flex; flex-direction: column; min-height: 100vh; }
 
-/* ── Top Nav ───────────────────────────────────────────── */
+
 .topnav {
   background: var(--surface); border-bottom: 1px solid var(--border);
   height: 52px; display: flex; align-items: center;
@@ -127,10 +126,10 @@ html, body { height: 100%; background: var(--bg); color: var(--text); font-famil
 }
 .btn-logout:hover { background: rgba(239,68,68,0.22); }
 
-/* ── Views ─────────────────────────────────────────────── */
+
 .view { padding: 20px 24px; }
 
-/* ── Add Book / User Bar ───────────────────────────────── */
+
 .add-book-bar, .add-user-bar {
   display: flex; align-items: center; gap: 10px;
   background: var(--surface); border: 1px solid var(--border);
@@ -157,7 +156,7 @@ html, body { height: 100%; background: var(--bg); color: var(--text); font-famil
 }
 .btn-add-book:hover { background: var(--accent2); }
 
-/* ── Search ────────────────────────────────────────────── */
+
 .search-bar-row {
   display: flex; align-items: center; gap: 10px;
   margin-bottom: 18px; flex-wrap: wrap;
@@ -182,18 +181,18 @@ html, body { height: 100%; background: var(--bg); color: var(--text); font-famil
 }
 .btn-clear:hover { color: var(--text); }
 
-/* ── Book Grid ─────────────────────────────────────────── */
+
 .book-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 14px;
 }
 
-/* Base card */
+
 .book-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-left: 4px solid var(--border); /* overridden per state */
+  border-left: 4px solid var(--border);
   border-radius: 10px;
   padding: 16px;
   display: flex; flex-direction: column; gap: 8px;
@@ -201,7 +200,7 @@ html, body { height: 100%; background: var(--bg); color: var(--text); font-famil
 }
 .book-card:hover { transform: translateY(-2px); }
 
-/* State border colours – matches reference pattern */
+
 .book-card.available    { border-left-color: var(--green); }
 .book-card.borrowed     { border-left-color: var(--yellow); }
 .book-card.out-of-stock { border-left-color: var(--red); }
@@ -209,7 +208,7 @@ html, body { height: 100%; background: var(--bg); color: var(--text); font-famil
 .book-title-text  { font-weight: 700; font-size: 14px; line-height: 1.3; }
 .book-author-text { font-size: 12px; color: var(--text-muted); }
 
-/* Status label */
+
 .book-status {
   font-size: 11px; font-weight: 600; font-family: var(--font-mono);
   display: flex; align-items: center; gap: 5px;
@@ -223,7 +222,7 @@ html, body { height: 100%; background: var(--bg); color: var(--text); font-famil
 .borrowed     .status-dot { background: var(--yellow); }
 .out-of-stock .status-dot { background: var(--red); }
 
-/* Action row */
+
 .book-actions { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
 
 .btn-borrow {
@@ -258,7 +257,7 @@ html, body { height: 100%; background: var(--bg); color: var(--text); font-famil
 }
 .btn-delete-book:hover { background: rgba(239,68,68,0.22); }
 
-/* ── Users Table ───────────────────────────────────────── */
+
 .users-table { width: 100%; border-collapse: collapse; }
 .users-table th {
   text-align: left; font-size: 11px; font-family: var(--font-mono);
@@ -277,7 +276,7 @@ html, body { height: 100%; background: var(--bg); color: var(--text); font-famil
 }
 .btn-remove-user:hover { background: rgba(239,68,68,0.22); }
 
-/* ── Edit Modal ────────────────────────────────────────── */
+
 .modal-overlay {
   position: fixed; inset: 0; background: rgba(0,0,0,0.65);
   display: flex; align-items: center; justify-content: center; z-index: 200;
@@ -300,7 +299,7 @@ html, body { height: 100%; background: var(--bg); color: var(--text); font-famil
 }
 .btn-save:hover { background: var(--accent2); }
 
-/* ── Toast ─────────────────────────────────────────────── */
+
 .toast {
   position: fixed; bottom: 24px; right: 24px;
   background: var(--surface2); border: 1px solid var(--border);
@@ -312,7 +311,7 @@ html, body { height: 100%; background: var(--bg); color: var(--text); font-famil
 .toast.error   { border-color: rgba(239,68,68,0.4);  color: #f87171; }
 .toast.hidden  { opacity: 0; pointer-events: none; }
 
-/* ── Empty State ───────────────────────────────────────── */
+
 .empty-state {
   grid-column: 1/-1; text-align: center; padding: 60px 0;
   color: var(--text-muted); font-size: 14px;

@@ -1,14 +1,9 @@
-// ========================================================================
-// Library System – App Logic
-// ========================================================================
 const API_BASE = window.location.origin;
 
-// ── State ──────────────────────────────────────────────
 let token       = localStorage.getItem('token') || null;
 let currentUser = null;
 let allBooks    = [];
 
-// ── Helpers ────────────────────────────────────────────
 const $  = (s) => document.querySelector(s);
 const $$ = (s) => document.querySelectorAll(s);
 
@@ -46,7 +41,6 @@ function escHtml(s) {
   return d.innerHTML;
 }
 
-// ── Auth Gate ───────────────────────────────────────────
 function showApp()   { $('#login-page').classList.add('hidden');    $('#app').classList.remove('hidden'); }
 function showLogin() { $('#login-page').classList.remove('hidden'); $('#app').classList.add('hidden'); }
 
@@ -59,7 +53,6 @@ function applyRoleUI() {
   $$('.admin-only').forEach(el => el.classList.toggle('hidden', !isAdmin));
 }
 
-// ── Login ───────────────────────────────────────────────
 $('#login-form').addEventListener('submit', async (e) => {
   e.preventDefault();
   const name     = $('#login-username').value.trim();
@@ -93,7 +86,7 @@ $('#login-form').addEventListener('submit', async (e) => {
     try {
       const profile = await apiFetch(`/users/${payload.sub}/profile`);
       currentUser = { ...currentUser, ...profile };
-    } catch { /* use token data */ }
+    } catch {}
 
     applyRoleUI();
     showApp();
@@ -109,7 +102,6 @@ $('#login-form').addEventListener('submit', async (e) => {
   }
 });
 
-// ── Page Switching (login ↔ register) ──────────────────
 function showRegister() {
   $('#login-page').classList.add('hidden');
   $('#register-page').classList.remove('hidden');
@@ -127,7 +119,6 @@ function showLoginPage() {
 $('#go-register').addEventListener('click', showRegister);
 $('#go-login').addEventListener('click', showLoginPage);
 
-// ── Register ────────────────────────────────────────────
 $('#register-form').addEventListener('submit', async (e) => {
   e.preventDefault();
   const username = $('#reg-username').value.trim();
@@ -164,7 +155,6 @@ $('#register-form').addEventListener('submit', async (e) => {
   }
 });
 
-// ── Logout ──────────────────────────────────────────────
 $('#logout-btn').addEventListener('click', () => {
   token = null; currentUser = null; allBooks = [];
   localStorage.removeItem('token');
@@ -173,7 +163,6 @@ $('#logout-btn').addEventListener('click', () => {
   $('#login-error').classList.add('hidden');
 });
 
-// ── Tab Navigation ──────────────────────────────────────
 function switchView(name) {
   $$('.nav-tab').forEach(t => t.classList.toggle('active', t.dataset.view === name));
   $$('.view').forEach(v => v.classList.toggle('hidden', v.id !== `view-${name}`));
@@ -181,7 +170,6 @@ function switchView(name) {
 }
 $$('.nav-tab').forEach(tab => tab.addEventListener('click', () => switchView(tab.dataset.view)));
 
-// ── Books – Load ────────────────────────────────────────
 async function loadBooks() {
   try {
     allBooks = await apiFetch('/books');
@@ -191,7 +179,6 @@ async function loadBooks() {
   }
 }
 
-// ── Books – Render ──────────────────────────────────────
 function getBookState(b) {
   if ((b.availableCopies ?? b.totalCopies) <= 0) return 'out-of-stock';
   if (b.userBorrowing) return 'borrowed';
@@ -212,7 +199,6 @@ function renderBooks(books) {
   $('#book-grid').innerHTML = books.map(b => {
     const state = getBookState(b);
 
-    // Button logic: borrowed → show Return, available → show Borrow, out-of-stock → show disabled Borrow
     let actionBtn = '';
     if (isLoggedIn) {
       if (state === 'borrowed') {
@@ -280,7 +266,6 @@ function attachBookListeners() {
   }));
 }
 
-// ── Add Book ────────────────────────────────────────────
 $('#add-book-btn').addEventListener('click', async () => {
   const title       = $('#add-title').value.trim();
   const author      = $('#add-author').value.trim();
@@ -296,7 +281,6 @@ $('#add-book-btn').addEventListener('click', async () => {
   } catch (err) { toast(err.message, 'error'); }
 });
 
-// ── Edit Modal ──────────────────────────────────────────
 $('#edit-cancel').addEventListener('click', () => $('#edit-modal').classList.add('hidden'));
 $('#edit-modal').addEventListener('click', (e) => {
   if (e.target === $('#edit-modal')) $('#edit-modal').classList.add('hidden');
@@ -314,7 +298,6 @@ $('#edit-save').addEventListener('click', async () => {
   } catch (err) { toast(err.message, 'error'); }
 });
 
-// ── Search ──────────────────────────────────────────────
 function handleSearch() {
   const t = $('#search-title').value.trim().toLowerCase();
   const a = $('#search-author').value.trim().toLowerCase();
@@ -334,7 +317,6 @@ $('#clear-search').addEventListener('click', () => {
   handleSearch();
 });
 
-// ── Users (admin) ───────────────────────────────────────
 async function loadUsers() {
   try {
     const users = await apiFetch('/users');
@@ -380,7 +362,6 @@ $('#add-user-btn').addEventListener('click', async () => {
   } catch (err) { toast(err.message, 'error'); }
 });
 
-// ── Init ────────────────────────────────────────────────
 (async function init() {
   if (!token) { showLogin(); return; }
 
@@ -400,7 +381,7 @@ $('#add-user-btn').addEventListener('click', async () => {
   try {
     const profile = await apiFetch(`/users/${payload.sub}/profile`);
     currentUser = { ...currentUser, ...profile };
-  } catch { /* use token payload */ }
+  } catch {}
 
   applyRoleUI();
   showApp();
